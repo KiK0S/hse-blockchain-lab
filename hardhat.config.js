@@ -6,9 +6,8 @@ require("@nomiclabs/hardhat-etherscan");
 
 require("dotenv").config();
 
-const privateKey = process.env.PRIVATE_KEY;
-const endpoint = process.env.URL;
-const etherscanKey = process.env.ETHERSCAN_KEY;
+const privateKey = process.env.PRIVATE_METAMASK_KEY;
+const endpoint = process.env.ALCHEMY_URL;
 
 
 module.exports = {
@@ -17,12 +16,9 @@ module.exports = {
   },
   networks: {
     goerli: {
-      url: `${endpoint}`,
+      url: endpoint,
       accounts: [privateKey]
     }
-  },
-  etherscan: {
-    apiKey: etherscanKey
   }
 }
 

@@ -67,5 +67,19 @@ describe("MyToken.sol", () => {
             const txFailure = initialSupply + 1;
             await expect(contract.transfer(txFailure, aliceAddress)).to.be.revertedWith("");
         });
+        it("create DVD", async () => {
+            const id = 1;
+            expect(contract.addDVD(ownerAddress, "harry potter", true, id)).to.be.ok;
+        });
+        it("remove DVD", async () => {
+            const id = 1;
+            expect(contract.addDVD(ownerAddress, "harry potter", true, id)).to.be.ok;
+            expect(contract.removeDVD(id)).to.be.ok;
+        });
+        it("can't remove DVD if not owner", async () => {
+            const id = 1;
+            expect(contract.addDVD(ownerAddress, "harry potter", true, id)).to.be.ok;
+            await expect(contract.connect(aliceAddress).removeDVD(id)).to.be.revertedWith("");
+        });
     });
 });
